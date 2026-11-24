@@ -25,7 +25,7 @@ Run from this checkout on Linux x86-64. The reference CPU was an AMD EPYC 9V74. 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-python -m pip install --index-url https://download.pytorch.org/whl/cpu torch==2.8.0
+python -m pip install --index-url https://download.pytorch.org/whl/cpu torch==2.15.0
 python -m pip install -c constraints-cpu.txt -r requirements-dev.txt
 python -m serving.benchmark --model "$MODEL_DIRECTORY" --revision "$MODEL_REVISION" --adapter "$ADAPTER_PATH" --cases ../engineering-llm-evaluation-framework/examples/base.json --out work-cpu.json
 ```
