@@ -1,0 +1,15 @@
+services:
+  inference:
+    build:
+      context: ..
+    ports: ["127.0.0.1:8000:8000"]
+    read_only: true
+    tmpfs: ["/tmp"]
+    cap_drop: ["ALL"]
+    security_opt: ["no-new-privileges:true"]
+    volumes: ["${MODEL_DIRECTORY:?Set a local model directory}:/model:ro"]
+    environment:
+      MODEL_PATH: /model
+      MODEL_REVISION: ${MODEL_REVISION:?Set the model revision}
+      SERVING_SECRET: ${SERVING_SECRET:?Set a private service token}
+      PRECISION: ${PRECISION:-fp32}

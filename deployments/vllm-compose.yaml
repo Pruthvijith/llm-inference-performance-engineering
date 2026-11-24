@@ -1,0 +1,16 @@
+services:
+  inference:
+    image: ${VLLM_IMAGE:?Set an approved vLLM image digest}
+    gpus: all
+    ipc: private
+    shm_size: 2gb
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - ${MODEL_DIRECTORY:?Select a vetted AWQ checkpoint}:/models/current:ro
+    environment:
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      VLLM_API_KEY: ${VLLM_API_KEY:?Supply a private service token}
+    command: ["--model", "/models/current", "--quantization", "awq", "--dtype", "half", "--max-model-len", "2048", "--gpu-memory-utilization", "0.80", "--tensor-parallel-size", "${GPU_COUNT:-1}"]
+    restart: "no"
