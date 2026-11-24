@@ -1,0 +1,11 @@
+{
+  "project": "llm-inference-performance-engineering",
+  "pytest_passed": 5,
+  "source_statements": 209,
+  "missed_statements": 19,
+  "statement_coverage": 90.91,
+  "coverage_scope": "serving",
+  "mypy": "Success: no issues found in 6 source files",
+  "ruff": "check and format passed",
+  "ci": "configured; hosted run unverified"
+}
